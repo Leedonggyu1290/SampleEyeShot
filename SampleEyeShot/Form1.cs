@@ -97,6 +97,26 @@ namespace SampleEyeShot
 
                         design1.Entities.Add((Entity)black.Clone(), System.Drawing.Color.Black);
                         design1.Invalidate();
+
+                        if (omokRule.CheckBlackConnect6(board, design1))
+                        {
+                            MessageBox.Show("장목은 금지되어있습니다.");
+                            design1.Entities.Remove(design1.Entities.Last());
+                            design1.Invalidate();
+
+                        }
+                        else if(omokRule.CheckDouble4(board, design1))
+                        {
+                            MessageBox.Show("4-4는 금지되어있습니다.");
+                            design1.Entities.Remove(design1.Entities.Last());
+                            design1.Invalidate();
+                        }
+                        else if (omokRule.CheckDouble3(board, design1))
+                        {
+                            MessageBox.Show("3-3은 금지되어있습니다.");
+                            design1.Entities.Remove(design1.Entities.Last());
+                            design1.Invalidate();
+                        }
                     }
                     else if (design1.Entities.Last().EntityData.ToString() == "Black")
                     {
@@ -118,14 +138,8 @@ namespace SampleEyeShot
                 }
             }
 
-            if (omokRule.checkBlackConnect6(board, design1))
-            {
-                MessageBox.Show("장목은 금지되어있습니다.");
-                design1.Entities.Remove(design1.Entities.Last());
-                design1.Invalidate();
-
-            }
-            else if (omokRule.CheckWin(board, design1))
+            
+            if (omokRule.CheckWin(board, design1))
             {
                 MessageBox.Show(design1.Entities.Last().EntityData.ToString() + " 승리");
                 while (design1.Entities.Last().EntityData.ToString() != "Board")
