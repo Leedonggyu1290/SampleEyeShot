@@ -22,6 +22,9 @@ namespace SampleEyeShot
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
 
+            bool checkBlink1 = true;
+            bool checkBlink2 = true;
+
             int count = 0;
 
             // 가로 검사
@@ -33,7 +36,10 @@ namespace SampleEyeShot
                         && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink1 = false;
+                        }
                         else
                             break;
                     }
@@ -44,17 +50,24 @@ namespace SampleEyeShot
                         && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
                 }
+                if (checkBlink1 == true || checkBlink2 == true)
+                    break;
             }
             if (count == 4)
             {
                 return true;
             }
             count = 0;
+            checkBlink1 = true;
+            checkBlink2 = true;
 
             // 세로 검사
             for (int i = 1; i <= 4; i++)
@@ -65,7 +78,10 @@ namespace SampleEyeShot
                         && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
@@ -76,17 +92,24 @@ namespace SampleEyeShot
                         && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
                 }
+                if (checkBlink1 == true || checkBlink2 == true)
+                    break;
             }
             if (count == 4)
             {
                 return true;
             }
             count = 0;
+            checkBlink1 = true;
+            checkBlink2 = true;
 
             // 우상향 대각 검사
             for (int i = 1; i <= 4; i++)
@@ -97,7 +120,10 @@ namespace SampleEyeShot
                         && Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
@@ -108,17 +134,24 @@ namespace SampleEyeShot
                         && Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
                 }
+                if (checkBlink1 == true || checkBlink2 == true)
+                    break;
             }
             if (count == 4)
             {
                 return true;
             }
             count = 0;
+            checkBlink1 = true;
+            checkBlink2 = true;
 
             // 우하향 대각 검사
             for (int i = 1; i <= 4; i++)
@@ -129,7 +162,10 @@ namespace SampleEyeShot
                         && Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
@@ -140,17 +176,24 @@ namespace SampleEyeShot
                         && Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
                     {
                         if (design.Entities.Last().EntityData == eggList[j].EntityData)
+                        {
                             count++;
+                            checkBlink2 = false;
+                        }
                         else
                             break;
                     }
                 }
+                if (checkBlink1 == true || checkBlink2 == true)
+                    break;
             }
             if (count == 4)
             {
                 return true;
             }
             count = 0;
+            checkBlink1 = true;
+            checkBlink2 = true;
 
             return false;
         }
@@ -376,6 +419,7 @@ namespace SampleEyeShot
             return false;
         }
 
+        // 흑돌 4-4 검사
         public bool CheckDouble4(Mesh board, Design design)
         {
             int doubleFourCount = 0;
@@ -390,7 +434,8 @@ namespace SampleEyeShot
             }
             return false;
         }
-
+        
+        // 4-4 가로 검사
         private int FindFourWidth(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -411,7 +456,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
                             && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if(eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone1++;
                             checkBlink = false;
@@ -456,7 +505,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
                             && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone2++;
                             checkBlink = false;
@@ -502,6 +555,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 4-4 세로 검사
         private int FindFourLength(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -522,7 +576,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
                             && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone1++;
                             checkBlink = false;
@@ -567,7 +625,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
                             && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone2++;
                             checkBlink = false;
@@ -613,6 +675,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 4-4 우상향 대각 검사
         private int FindFourDiagonalUpwardRight(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -633,7 +696,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
                             && Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone1++;
                             checkBlink = false;
@@ -678,7 +745,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
                             && Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone2++;
                             checkBlink = false;
@@ -724,6 +795,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 4-4 우하향 대각 검사
         private int FindFourDiagonalDownwardRight(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -744,7 +816,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
                              && Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone1++;
                             checkBlink = false;
@@ -789,7 +865,11 @@ namespace SampleEyeShot
                     if (Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
                             && Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
                     {
-                        if (eggList[j].EntityData == "Black")
+                        if (eggList[j].EntityData == "White")
+                        {
+                            checkBlink = true;
+                        }
+                        else if (eggList[j].EntityData == "Black")
                         {
                             stone2++;
                             checkBlink = false;
@@ -835,6 +915,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 3-3 가로 검사
         private int FindThreeWidth(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -972,6 +1053,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 3-3 세로 검사
         private int FindThreeLength(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -1109,6 +1191,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 3-3 우상향 대각 검사
         private int FindThreeDiagonalUpwardRight(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
@@ -1248,6 +1331,7 @@ namespace SampleEyeShot
             }
         }
 
+        // 3-3 우하향 대각 검사
         private int FindThreeDiagonalDownwardRight(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
