@@ -17,8 +17,8 @@ namespace SampleEyeShot
 {
     class OmokRule
     {
-        //승리 검사
-        public bool CheckWin(Mesh board, Design design)
+        //승리 및 장목 검사
+        public int CheckEggNum(Mesh board, Design design)
         {
             List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black" || x.EntityData == "White").ToList();
 
@@ -84,7 +84,11 @@ namespace SampleEyeShot
             }
             if (count == 4)
             {
-                return true;
+                return 0;
+            }
+            else if(count >= 5)
+            {
+                return 1;
             }
             count = 0;
             checkBlink = false;
@@ -148,7 +152,11 @@ namespace SampleEyeShot
 
             if (count == 4)
             {
-                return true;
+                return 0;
+            }
+            else if(count >= 5)
+            {
+                return 1;
             }
             count = 0;
             checkBlink = false;
@@ -212,7 +220,11 @@ namespace SampleEyeShot
 
             if (count == 4)
             {
-                return true;
+                return 0;
+            }
+            else if(count >= 5)
+            {
+                return 1;
             }
             count = 0;
             checkBlink = false;
@@ -276,217 +288,17 @@ namespace SampleEyeShot
 
             if (count == 4)
             {
-                return true;
+                return 0;
+            }
+            else if(count >= 5)
+            {
+                return 1;
             }
             count = 0;
             checkBlink = false;
             checkEnemy = false;
 
-            return false;
-        }
-
-        // 흑돌 장목 검사
-        public bool CheckBlackConnect6(Mesh board, Design design)
-        {
-            List<Entity> eggList = design.Entities.Where(x => x.EntityData == "Black").ToList();
-
-            int count = 0;
-
-            // 가로 검사
-            for(int i = 1; i <= 4; i++)
-            {
-                for(int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            // 세로 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            // 우상향 대각 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            // 우하향 대각 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            return false;
-        }
-
-        //흰돌 장목 검사
-        public bool checkWhiteConnect6(Mesh board, Design design)
-        {
-            List<Entity> eggList = design.Entities.Where(x => x.EntityData == "White").ToList();
-
-            int count = 0;
-
-            // 가로 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && design.Entities.Last().BoxMax.Y == eggList[j].BoxMax.Y)
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            // 세로 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && design.Entities.Last().BoxMax.X == eggList[j].BoxMax.X)
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            // 우상향 대각 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X)
-                        && Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y))
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            // 우하향 대각 검사
-            for (int i = 1; i <= 4; i++)
-            {
-                for (int j = 0; j < eggList.Count(); j++)
-                {
-                    if (Math.Round(design.Entities.Last().BoxMax.Y - ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && Math.Round(design.Entities.Last().BoxMax.X + ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
-                    {
-                        count++;
-                    }
-                    if (Math.Round(design.Entities.Last().BoxMax.Y + ((board.BoxMax.Y / 18) * i)) == Math.Round(eggList[j].BoxMax.Y)
-                        && Math.Round(design.Entities.Last().BoxMax.X - ((board.BoxMax.X / 18) * i)) == Math.Round(eggList[j].BoxMax.X))
-                    {
-                        count++;
-                    }
-                }
-            }
-            if (count >= 5)
-            {
-                return true;
-            }
-            count = 0;
-
-            return false;
+            return 2;
         }
 
         // 흑돌 3-3 검사
