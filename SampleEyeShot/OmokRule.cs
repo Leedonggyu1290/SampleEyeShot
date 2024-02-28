@@ -79,7 +79,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
             if (count == 4)
@@ -117,7 +117,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
 
@@ -146,7 +146,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
 
@@ -185,7 +185,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
 
@@ -214,7 +214,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
 
@@ -253,7 +253,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
 
@@ -282,7 +282,7 @@ namespace SampleEyeShot
                     else
                         checkBlink = true;
                 }
-                if (checkBlink == true || checkEnemy == true)
+                if (checkBlink || checkEnemy)
                     break;
             }
 
@@ -830,7 +830,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for(int i = 1; i <= 4; i++)
+            for(int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -881,7 +881,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -934,21 +934,17 @@ namespace SampleEyeShot
             {
                 return 0;
             }
-
-            if (wallBlock == true)
+            else if (wallBlock == true)
+            {
+                return 0;
+            }
+            else if (enemyBlock == true)
             {
                 return 0;
             }
             else
             {
-                if(enemyBlock == true)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
+                return 1;
             }
         }
 
@@ -968,7 +964,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1019,7 +1015,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1072,21 +1068,17 @@ namespace SampleEyeShot
             {
                 return 0;
             }
-
-            if (wallBlock == true)
+            else if (wallBlock == true)
+            {
+                return 0;
+            }
+            else if (enemyBlock == true)
             {
                 return 0;
             }
             else
             {
-                if (enemyBlock == true)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
+                return 1;
             }
         }
 
@@ -1106,7 +1098,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1158,7 +1150,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1212,21 +1204,17 @@ namespace SampleEyeShot
             {
                 return 0;
             }
-
-            if (wallBlock == true)
+            else if (wallBlock == true)
+            {
+                return 0;
+            }
+            else if (enemyBlock == true)
             {
                 return 0;
             }
             else
             {
-                if (enemyBlock == true)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
+                return 1;
             }
         }
 
@@ -1246,7 +1234,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1298,7 +1286,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 3; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1352,21 +1340,17 @@ namespace SampleEyeShot
             {
                 return 0;
             }
-
-            if (wallBlock == true)
+            else if (wallBlock == true)
+            {
+                return 0;
+            }
+            else if (enemyBlock == true)
             {
                 return 0;
             }
             else
             {
-                if (enemyBlock == true)
-                {
-                    return 0;
-                }
-                else
-                {
-                    return 1;
-                }
+                return 1;
             }
         }
     }
