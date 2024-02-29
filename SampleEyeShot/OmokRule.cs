@@ -830,7 +830,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for(int i = 1; i <= 3; i++)
+            for(int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -881,7 +881,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -964,7 +964,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1015,7 +1015,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1098,7 +1098,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1150,7 +1150,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1234,7 +1234,7 @@ namespace SampleEyeShot
             bool wallBlock = false;
             bool enemyBlock = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
@@ -1286,7 +1286,7 @@ namespace SampleEyeShot
             checkBlink = false;
             checkEgg = false;
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 for (int j = 0; j < eggList.Count(); j++)
                 {
